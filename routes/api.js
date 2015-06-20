@@ -10,7 +10,7 @@ var config = {
   corpId: 'wx0328f4ebaec4d5d4'
 };
 
-router.get('/', function(req, res){
+router.get('/', function (req, res) {
   var msg_signature = req.query.msg_signature;
   var timestamp = req.query.timestamp;
   var nonce = req.query.nonce;
@@ -34,29 +34,8 @@ router.get('/', function(req, res){
 router.use(express.query());
 router.use('/', wechat(config, wechat.text(function (message, req, res, next) {
   // 微信输入信息都在message上
-  // 回复屌丝(普通回复)
-  if (message.FromUserName === 'zhangjie2') {
-    console.log('zhangjie reply');
-    res.reply('hdehe');
-  } else if (message.FromUserName === 'kpsesuo') {
-    res.reply({
-      title: "来段音乐吧",
-      description: "一无所有",
-      musicUrl: "http://mp3.com/xx.mp3",
-      hqMusicUrl: "http://mp3.com/xx.mp3"
-    });
-  } else {
-    // 回复高富帅(图文回复)
-    console.log('url reply');
-    res.reply([
-      {
-        title: '你来我家接我吧',
-        description: '这是女神与高富帅之间的对话',
-        picurl: 'http://nodeapi.cloudfoundry.com/qrcode.jpg',
-        url: 'http://nodeapi.cloudfoundry.com/'
-      }
-    ]);
-  }
+  console.log('zhangjie reply');
+  res.reply('欢迎使用，暂时只有查询工资条功能');
 }).location(function (message, req, res, next) {
   res.reply('location');
 }).image(function (message, req, res, next) {
@@ -71,8 +50,8 @@ router.use('/', wechat(config, wechat.text(function (message, req, res, next) {
     {
       title: '工资查询',
       description: '王伟的6月工资条',
-      picurl: 'http://nodeapi.cloudfoundry.com/qrcode.jpg',
-      url: 'http://nodeapi.cloudfoundry.com/'
+      picurl: 'http://img1.cache.netease.com/catchpic/4/4F/4F678FDC36A992A07952027E570159B6.jpg',
+      url: 'http://mm-query.herokuapp.com/report?userID=' + message.FromUserName
     }
   ]);
 })));

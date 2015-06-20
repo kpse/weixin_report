@@ -1,0 +1,79 @@
+extends layout
+
+block content
+  h1
+    | 6月员工工资条:
+    = ' ' + r.name
+  table.table.table-bordered.table-striped
+    tr
+      td.col-xs-3 基础工资
+      td.col-xs-3= r.f1
+    tr
+      td.col-xs-3 岗位工资
+      td.col-xs-3= r.f2
+    tr
+      td.col-xs-3 绩效工资
+      td.col-xs-3= r.f3
+    tr
+      td.col-xs-3 绩效工资发放比例
+      td.col-xs-3= r.f4
+    tr
+      td.col-xs-3 本月绩效工资
+      td.col-xs-3= r.f5
+    tr
+      td.col-xs-3 工资总额
+      td.col-xs-3= r.f6
+    tr
+      td.col-xs-3 本月工资总额
+      td.col-xs-3= r.f7
+    tr
+      td.col-xs-3 奖金/双薪
+      td.col-xs-3= r.f8
+    tr
+      td.col-xs-3 出差补助
+      td.col-xs-3= r.f9
+    tr
+      td.col-xs-3 费用报销
+      td.col-xs-3= r.f10
+    tr
+      td.col-xs-3 调整项
+      td.col-xs-3= r.f11
+    tr
+      td.col-xs-3 调整工资
+      td.col-xs-3= r.f12
+    tr
+      td.col-xs-3 考勤扣除
+      td.col-xs-3= r.f13
+    tr
+      td.col-xs-3 应发工资
+      td.col-xs-3= r.f14
+    tr
+      td.col-xs-3 社保＋公积金(个人)
+      td.col-xs-3= r.f15
+    tr
+      td.col-xs-3 公积金(个人)
+      td.col-xs-3= r.f16
+    tr
+      td.col-xs-3 个人所得税
+      td.col-xs-3= r.f17
+    tr
+      td.col-xs-3 双薪补扣税
+      td.col-xs-3= r.f18
+    tr
+      td.col-xs-3 分期还款
+      td.col-xs-3= r.f19
+    tr
+      td.col-xs-3 实发工资
+      td.col-xs-3= r.f20
+    tr
+      td.col-xs-3 部门
+      td.col-xs-3= r.f21
+    tr
+      td.col-xs-3 备注
+      td.col-xs-3= r.f22
+    tr
+      td.col-xs-3 说明
+      td.col-xs-3= r.f23
+    tr
+      td.col-xs-3 游戏绩效分值
+      td.col-xs-3= r.f24
