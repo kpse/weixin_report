@@ -35,7 +35,7 @@ router.use(express.query());
 router.use('/', wechat(config, wechat.text(function (message, req, res, next) {
   // 微信输入信息都在message上
   // 回复屌丝(普通回复)
-  if (message.FromUserName === 'zhangjie') {
+  if (message.FromUserName === 'zhangjie2') {
     console.log('zhangjie reply');
     res.reply('hdehe');
   } else if (message.FromUserName === 'kpsesuo') {
@@ -67,7 +67,14 @@ router.use('/', wechat(config, wechat.text(function (message, req, res, next) {
   res.reply('link');
 }).event(function (message, req, res, next) {
   console.log('event reply');
-  res.reply('event');
+  res.reply([
+    {
+      title: '工资查询',
+      description: '王伟的6月工资条',
+      picurl: 'http://nodeapi.cloudfoundry.com/qrcode.jpg',
+      url: 'http://nodeapi.cloudfoundry.com/'
+    }
+  ]);
 })));
 
 module.exports = router;
