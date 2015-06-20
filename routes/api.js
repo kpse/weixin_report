@@ -35,9 +35,10 @@ router.use(express.query());
 router.use('/', wechat(config, wechat.text(function (message, req, res, next) {
   // 微信输入信息都在message上
   // 回复屌丝(普通回复)
-  if (message.FromUserName === 'diaosi') {
+  if (message.FromUserName === 'zhangjie') {
+    console.log('zhangjie reply');
     res.reply('hdehe');
-  } else if (message.FromUserName === 'hehe') {
+  } else if (message.FromUserName === 'kpsesuo') {
     res.reply({
       title: "来段音乐吧",
       description: "一无所有",
@@ -46,6 +47,7 @@ router.use('/', wechat(config, wechat.text(function (message, req, res, next) {
     });
   } else {
     // 回复高富帅(图文回复)
+    console.log('url reply');
     res.reply([
       {
         title: '你来我家接我吧',
@@ -64,6 +66,7 @@ router.use('/', wechat(config, wechat.text(function (message, req, res, next) {
 }).link(function (message, req, res, next) {
   res.reply('link');
 }).event(function (message, req, res, next) {
+  console.log('event reply');
   res.reply('event');
 })));
 
