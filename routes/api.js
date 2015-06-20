@@ -25,10 +25,10 @@ router.post('/', function(req, res){
   var msg_signature = req.query.msg_signature;
   var timestamp = req.query.timestamp;
   var nonce = req.query.nonce;
-  var echostr = req.query.echostr;
-  var cryptor = new WXBizMsgCrypt(config.token, config.encodingAESKey, config.corpId)
-  var s = cryptor.decrypt(echostr);
-  res.send(s.message);
+  //var cryptor = new WXBizMsgCrypt(config.token, config.encodingAESKey, config.corpId)
+  var wrapTpl = 'haha';
+  //var encrypted = cryptor.encrypt(wrapTpl);
+  res.send(wrapTpl);
 });
 
 module.exports = router;
