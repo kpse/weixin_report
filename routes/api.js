@@ -20,7 +20,8 @@ router.get('/', function(req, res){
 });
 
 router.post('/', function(req, res){
-  console.log(req)
+  console.log(req.body)
+  console.log(req.query)
   var msg_signature = req.query.msg_signature;
   var timestamp = req.query.timestamp;
   var nonce = req.query.nonce;
