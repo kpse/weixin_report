@@ -1,10 +1,32 @@
 var express = require('express');
 var router = express.Router();
 
+router.get('/login', function (req, res, next) {
+  var id = req.query.userID
+  var err = req.query.err
+  res.render('login', {
+    title: id + '登陆',
+    c: {name: id},
+    error: {err: err, name: '用户密码错，请确认注册时设置的查询密码'}
+  })
+});
+
+router.post('/login', function (req, res, next) {
+  var postData = req.body
+  var p = {'zhangjie': '123456', 'zhangjie2': '654321'}
+  console.log(postData)
+  if (postData.password == p[postData.userid]) {
+    res.redirect('/report?userID=' + postData.userid + '&month=' + postData.month)
+  } else {
+    res.redirect('/report/login?userID=' + postData.userid + '&err=1')
+  }
+});
+
 router.get('/', function (req, res, next) {
   res.render('salary_report', {
     title: '6月工资',
-    r: pickUser(req.query.userID)
+    r: pickUser(req.query.userID),
+    month: req.query.month
   })
 });
 

@@ -2,8 +2,9 @@ extends layout
 
 block content
   h1
-    | 6月员工工资条:
-    = ' ' + r.name
+    = month
+  h1
+    = '员工工资条: ' + r.name
   table.table.table-bordered.table-striped
     tr
       td.col-xs-3 基础工资
