@@ -16,7 +16,7 @@ router.post('/login', function (req, res, next) {
   var p = {'zhangjie': '123456', 'zhangjie2': '654321'}
   console.log(postData)
   if (postData.password == p[postData.userid]) {
-    res.redirect('/report?userID=' + postData.userid + '&month=' + postData.month)
+    res.redirect('/report?userID=' + postData.userid + '&month=' + (postData.month ? postData.month : '201506'))
   } else {
     res.redirect('/report/login?userID=' + postData.userid + '&err=1')
   }
