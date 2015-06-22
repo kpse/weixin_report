@@ -51,7 +51,7 @@ router.use('/', wechat(config, wechat.text(function (message, req, res, next) {
       title: '工资查询',
       description: '王伟的6月工资条',
       picurl: 'http://img1.cache.netease.com/catchpic/4/4F/4F678FDC36A992A07952027E570159B6.jpg',
-      url: 'http://mm-query.herokuapp.com/report?userID=' + message.FromUserName
+      url: 'http://mm-query.herokuapp.com/report/login?userID=' + message.FromUserName
     }
   ]);
 })));
