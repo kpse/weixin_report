@@ -15,10 +15,10 @@ router.post('/login', function (req, res, next) {
   var postData = req.body
   var p = {'zhangjie': '123456', 'zhangjie2': '654321'}
   console.log(postData)
-  if (postData.password == p[postData.userid]) {
-    res.redirect('/report?userID=' + postData.userid + '&month=' + (postData.month ? postData.month : '201506'))
+  if (postData.password == p[postData.username]) {
+    res.redirect('/report?userID=' + postData.username + '&month=' + (postData.month ? postData.month : '201506'))
   } else {
-    res.redirect('/report/login?userID=' + postData.userid + '&err=1')
+    res.redirect('/report/login?userID=' + postData.username + '&err=1')
   }
 });
 

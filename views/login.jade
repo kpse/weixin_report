@@ -3,12 +3,12 @@ extends layout
 block content
   .container
     form.form-signin(action="/report/login", method="post")
-      h2.form-signin-heading 请输入#{c.name}的工资条查询密码
+      h2.form-signin-heading 安全起见，请输入用户名:#{c.name}的查询密码
       if error && error.err > 0
         p.error-msg 密码错误，请重新输入
-      input.input-block-level.form-control(disabled='disabled', type="text", name="username", value=c.name)
-      input.input-block-level.form-control(type="hidden", name="userid", value=c.name)
+      input.input-block-level.form-control(type="hidden", name="username", value=c.name)
       input.input-block-level.form-control(type="password", name="password", placeholder="Password")
+      h4 及选择要查询的工资条月份
       input.input-block-level.form-control(type="text", name="month", placeholder="6位数字如201506表示月份")
       button.btn.btn-lg.btn-primary.btn-block(type="submit") 提交
 
