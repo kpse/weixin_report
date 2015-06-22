@@ -24,7 +24,7 @@ router.post('/login', function (req, res, next) {
 
 router.get('/', function (req, res, next) {
   res.render('salary_report', {
-    title: '6月工资',
+    title: req.query.month + '工资条',
     r: pickUser(req.query.userID),
     month: req.query.month
   })
