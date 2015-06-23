@@ -50,43 +50,39 @@ router.use('/', wechat(config, wechat.text(function (message, req, res, next) {
   console.log('message.Event is ' + message.Event);
   console.log('message.EventKey is ' + message.EventKey);
 
-  if (message.Event == 'click' && message.EventKey ==  'V1001_SALARY') {
+  if (message.Event == 'click' && message.EventKey == 'V1001_SALARY') {
     res.reply([
       {
         title: '工资查询',
-        description: '查询' +  message.FromUserName + '的工资条',
+        description: '查询' + message.FromUserName + '的工资条',
         picurl: 'http://img1.cache.netease.com/catchpic/4/4F/4F678FDC36A992A07952027E570159B6.jpg',
         url: 'http://mm-query.herokuapp.com/report/login?userID=' + message.FromUserName
       }
     ]);
   } else if (message.Event == 'enter_agent') {
-    pickUser(message.FromUserName, function(u){
-      console.log('picker user: ' + u);
-      if (!u) {
-        res.reply([
-          {
-            title: '请先注册',
-            description: message.FromUserName + ' 您好，为了保护您的信息安全，请先设置工资条查询密码。',
-            picurl: 'http://n5.map.pg0.cn/T15zxvBsET1RCvBVdK/w252/h212',
-            url: 'http://mm-query.herokuapp.com/register?userID=' + message.FromUserName
-          }
-        ]);
-      } else {
-        res.reply('您已经设置了查询密码，可以进行工资条查询。');
-      }
-    })
+    var u = pickUser(message.FromUserName)
+    console.log('picked user: ' + u);
+    if (!u) {
+      res.reply([
+        {
+          title: '请先注册',
+          description: message.FromUserName + ' 您好，为了保护您的信息安全，请先设置工资条查询密码。',
+          picurl: 'http://n5.map.pg0.cn/T15zxvBsET1RCvBVdK/w252/h212',
+          url: 'http://mm-query.herokuapp.com/register?userID=' + message.FromUserName
+        }
+      ]);
+    } else {
+      res.reply('您已经设置了查询密码，可以进行工资条查询。');
+    }
+
   } else {
     console.log('default case');
     res.reply('欢迎使用，暂时只有查询工资条功能');
   }
 })));
 
-function pickUser(name, callback) {
-  var db = new loki('salary.db');
-  db.loadDatabase({}, function () {
-    var users = db.getCollection('users');
-    callback(users.findOne({'id': name}))
-  });
+function pickUser(name) {
+  return name != 'zhangjie';
 }
 
 module.exports = router;
