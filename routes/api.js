@@ -45,15 +45,30 @@ router.use('/', wechat(config, wechat.text(function (message, req, res, next) {
 }).link(function (message, req, res, next) {
   res.reply('link');
 }).event(function (message, req, res, next) {
-  console.log('event reply');
-  res.reply([
-    {
-      title: '工资查询',
-      description: '王伟的6月工资条',
-      picurl: 'http://img1.cache.netease.com/catchpic/4/4F/4F678FDC36A992A07952027E570159B6.jpg',
-      url: 'http://mm-query.herokuapp.com/report/login?userID=' + message.FromUserName
-    }
-  ]);
+  console.log('event reply' + message);
+  console.log('message.Event is ' + message.Event);
+
+  if (message.Event == 'V1001_SALARY') {
+    res.reply([
+      {
+        title: '工资查询',
+        description: '查询' +  message.FromUserName + '的工资条',
+        picurl: 'http://img1.cache.netease.com/catchpic/4/4F/4F678FDC36A992A07952027E570159B6.jpg',
+        url: 'http://mm-query.herokuapp.com/report/login?userID=' + message.FromUserName
+      }
+    ]);
+  } else if (message.Event == 'subscribe') {
+    res.reply([
+      {
+        title: '请先注册',
+        description: message.FromUserName + ' 您好，为了保护您的信息安全，请先设置工资条查询密码。',
+        picurl: 'http://n5.map.pg0.cn/T15zxvBsET1RCvBVdK/w252/h212',
+        url: 'http://mm-query.herokuapp.com/register?userID=' + message.FromUserName
+      }
+    ]);
+  } else {
+    res.reply('nothing');
+  }
 })));
 
 module.exports = router;

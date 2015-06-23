@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  .container
+  form.form-signin(action="/register", method="post")
+    h2.form-signin-heading 安全起见，请设置用户名:#{name}的查询密码
+    input.input-block-level.form-control(type="hidden", name="username", value=name)
+    input.input-block-level.form-control(type="password", name="password", placeholder="Password")
+    input.input-block-level.form-control(type="password", name="password-confirm", placeholder="Password confirmation")
+    button.btn.btn-lg.btn-primary.btn-block(type="submit") 提交
+
+

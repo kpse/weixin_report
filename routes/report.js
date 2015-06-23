@@ -2,8 +2,8 @@ var express = require('express');
 var router = express.Router();
 
 router.get('/login', function (req, res, next) {
-  var id = req.query.userID
-  var err = req.query.err
+  var id = req.query.userID;
+  var err = req.query.err;
   res.render('login', {
     title: id + '登陆',
     c: {name: id},
@@ -12,9 +12,9 @@ router.get('/login', function (req, res, next) {
 });
 
 router.post('/login', function (req, res, next) {
-  var postData = req.body
-  var p = {'zhangjie': '123456', 'zhangjie2': '654321'}
-  console.log(postData)
+  var postData = req.body;
+  var p = {'zhangjie': '123456', 'zhangjie2': '654321'};
+  console.log(postData);
   if (postData.password == p[postData.username]) {
     res.redirect('/report?userID=' + postData.username + '&month=' + (postData.month ? postData.month : '201506'))
   } else {
