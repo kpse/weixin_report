@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var loki = require('lokijs');
 
 var WXBizMsgCrypt = require('wechat-crypto');
 var wechat = require('wechat-enterprise');
@@ -80,8 +81,9 @@ router.use('/', wechat(config, wechat.text(function (message, req, res, next) {
 })));
 
 function pickUser(name, callback) {
+  var db = new loki('salary.db');
   db.loadDatabase({}, function () {
-    users = db.getCollection('users');
+    var users = db.getCollection('users');
     callback(users.findOne({'id': name}))
   });
 }
