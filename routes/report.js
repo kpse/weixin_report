@@ -11,7 +11,7 @@ db.loadDatabase({}, function () {
 router.get('/login', function (req, res, next) {
   var id = req.query.userID;
   pickUser(id, function (u) {
-    if (!u) return res.send(404, 'no such user');
+    if (!u) return res.redirect('/register?userID=' + id);
     var err = req.query.err;
     res.render('login', {
       title: id + '登陆',
