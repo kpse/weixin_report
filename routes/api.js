@@ -61,6 +61,7 @@ router.use('/', wechat(config, wechat.text(function (message, req, res, next) {
     ]);
   } else if (message.Event == 'enter_agent') {
     pickUser(message.FromUserName, function(u){
+      console.log('picker user: ' + u);
       if (!u) {
         res.reply([
           {
