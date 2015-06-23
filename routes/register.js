@@ -1,5 +1,13 @@
 var express = require('express');
+var loki = require('lokijs');
 var router = express.Router();
+
+var db = new loki('salary');
+var users = {}
+db.loadDatabase({}, function () {
+  users = db.getCollection('users');
+});
+
 
 router.get('/', function (req, res, next) {
   res.render('register', {
@@ -9,7 +17,17 @@ router.get('/', function (req, res, next) {
 });
 
 router.post('/', function (req, res, next) {
-  var username = req.body.username
+  var username = req.body.username;
+  var password = req.body.password;
+  var template  = users.findOne({'id': 'template'}).detail;
+  template.name = username;
+  db.loadDatabase({}, function () {
+    users = db.getCollection('users')
+    users.insert({id: username, detail: template, password: password});
+    console.log(users);
+    db.saveDatabase();
+  });
+
   res.render('register-success', {
     name: username
   })
