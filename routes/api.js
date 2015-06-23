@@ -58,18 +58,32 @@ router.use('/', wechat(config, wechat.text(function (message, req, res, next) {
         url: 'http://mm-query.herokuapp.com/report/login?userID=' + message.FromUserName
       }
     ]);
-  } else if (message.Event == 'subscribe') {
-    res.reply([
-      {
-        title: '请先注册',
-        description: message.FromUserName + ' 您好，为了保护您的信息安全，请先设置工资条查询密码。',
-        picurl: 'http://n5.map.pg0.cn/T15zxvBsET1RCvBVdK/w252/h212',
-        url: 'http://mm-query.herokuapp.com/register?userID=' + message.FromUserName
+  } else if (message.Event == 'enter_agent') {
+    pickUser(message.FromUserName, function(u){
+      if (!u) {
+        res.reply([
+          {
+            title: '请先注册',
+            description: message.FromUserName + ' 您好，为了保护您的信息安全，请先设置工资条查询密码。',
+            picurl: 'http://n5.map.pg0.cn/T15zxvBsET1RCvBVdK/w252/h212',
+            url: 'http://mm-query.herokuapp.com/register?userID=' + message.FromUserName
+          }
+        ]);
+      } else {
+        res.reply('您已经设置了查询密码，可以进行工资条查询。');
       }
-    ]);
+    })
   } else {
-    res.reply('nothing');
+    console.log('default case');
+    res.reply('欢迎使用，暂时只有查询工资条功能');
   }
 })));
+
+function pickUser(name, callback) {
+  db.loadDatabase({}, function () {
+    users = db.getCollection('users');
+    callback(users.findOne({'id': name}))
+  });
+}
 
 module.exports = router;
