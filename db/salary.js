@@ -1,6 +1,6 @@
 var loki = require('lokijs');
 
-var db = new loki('salary');
+var db = new loki('salary.db');
 var users = db.addCollection('users');
 users.insert({
   "id": "template",

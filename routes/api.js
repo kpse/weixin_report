@@ -45,10 +45,11 @@ router.use('/', wechat(config, wechat.text(function (message, req, res, next) {
 }).link(function (message, req, res, next) {
   res.reply('link');
 }).event(function (message, req, res, next) {
-  console.log('event reply' + message);
+  console.log('message.FromUserName is ' + message.FromUserName);
   console.log('message.Event is ' + message.Event);
+  console.log('message.EventKey is ' + message.EventKey);
 
-  if (message.Event == 'V1001_SALARY') {
+  if (message.Event == 'click' && message.EventKey ==  'V1001_SALARY') {
     res.reply([
       {
         title: '工资查询',

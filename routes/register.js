@@ -2,7 +2,7 @@ var express = require('express');
 var loki = require('lokijs');
 var router = express.Router();
 
-var db = new loki('salary');
+var db = new loki('salary.db');
 var users = {}
 db.loadDatabase({}, function () {
   users = db.getCollection('users');
